@@ -1,6 +1,3 @@
-USE GDW
-GO
-
 --create staging tables for ETL process
 CREATE TABLE STAGE.fact_GameReviews (
 	GameId integer NOT NULL PRIMARY KEY,
@@ -19,7 +16,7 @@ CREATE TABLE STAGE.dim_date (
 	day integer);
 
 CREATE TABLE STAGE.dim_DeveloperTable (
-	DeveloperId integer NOT NULL PRIMARY KEY,
+	DeveloperId integer,
 	DeveloperName varchar(200),
 	DeveloperCount integer,
 	ScrapeDate varchar(50));

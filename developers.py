@@ -85,7 +85,7 @@ def load_to_database():
     
     developer_filtered = utilities.read_from_json(config['JSONarchive']['developer_filtered'])
     
-    conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=918121\SQLEXPRESS;DATABASE=GDW;Trusted_Connection=yes;')
+    conn = pyodbc.connect(config['Database']['connection_string'])
     crsr = conn.cursor()
 
     load_count = 0

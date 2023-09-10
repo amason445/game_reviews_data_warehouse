@@ -1,6 +1,9 @@
 [APIkeys]
 rawgio_key = ""
 
+[Database]
+connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=918121\\SQLEXPRESS;DATABASE=GDW;Trusted_Connection=yes;"
+
 [JSONarchive]
 developer_extract = "json_archive\\developer_extract.json"
 developer_filtered = "json_archive\\developer_filtered.json"
