@@ -3,3 +3,4 @@ rawgio_key = ""
 
 [JSONarchive]
 developer_extract = "json_archive\\developer_extract.json"
+developer_filtered = "json_archive\\developer_filtered.json"
