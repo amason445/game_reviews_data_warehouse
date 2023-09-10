@@ -1,0 +1,5 @@
+[APIkeys]
+rawgio_key = ""
+
+[JSONarchive]
+developer_extract = "json_archive\\developer_extract.json"
