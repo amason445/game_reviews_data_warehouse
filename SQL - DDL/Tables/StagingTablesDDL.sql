@@ -5,7 +5,7 @@ GO
 CREATE TABLE STAGE.fact_GameReviews (
 	GameId integer NOT NULL PRIMARY KEY,
 	GameTitle varchar,
-	ReleaseDate date,
+	ReleaseDate varchar,
 	DeveloperId integer,
 	RawgIO_Rating float,
 	RawgRatingsCount integer,
@@ -20,8 +20,9 @@ CREATE TABLE STAGE.dim_date (
 
 CREATE TABLE STAGE.dim_DeveloperTable (
 	DeveloperId integer NOT NULL PRIMARY KEY,
-	DeveloperName varchar,
-	DeveloperCount integer);
+	DeveloperName varchar(200),
+	DeveloperCount integer,
+	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_GenreTable (
 	GenreId integer NOT NULL PRIMARY KEY,
