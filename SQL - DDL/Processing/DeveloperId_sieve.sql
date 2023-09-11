@@ -4,11 +4,12 @@ Query is intended to be embedded in Python code to select all distinct developer
 
 WITH max_date AS (
 
-SELECT
-DeveloperId,
-RANK() OVER(ORDER BY ScrapeDate DESC) as max_date
+	SELECT
+	DeveloperId,
+	RANK() OVER(ORDER BY ScrapeDate DESC) as max_date
 
-FROM STAGE.dim_DeveloperTable)
+	FROM STAGE.dim_DeveloperTable
+)
 
 SELECT DISTINCT DeveloperId
 

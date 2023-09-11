@@ -7,3 +7,5 @@ connection_string = "DRIVER={ODBC Driver 17 for SQL Server};SERVER=918121\\SQLEX
 [JSONarchive]
 developer_extract = "json_archive\\developer_extract.json"
 developer_filtered = "json_archive\\developer_filtered.json"
+games_extract = "json_archive\\games_extract.json"
+games_filtered = "json_archive\\games_filtered.json"

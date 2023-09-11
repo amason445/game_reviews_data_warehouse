@@ -1,12 +1,13 @@
 --create staging tables for ETL process
 CREATE TABLE STAGE.fact_GameReviews (
-	GameId integer NOT NULL PRIMARY KEY,
-	GameTitle varchar,
-	ReleaseDate varchar,
+	GameId integer,
+	GameTitle varchar(500),
+	ReleaseDate varchar(50),
 	DeveloperId integer,
 	RawgIO_Rating float,
 	RawgRatingsCount integer,
-	MetacriticScore integer);
+	MetacriticScore varchar(50),
+	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_date (
 	Date date NOT NULL PRIMARY KEY,
