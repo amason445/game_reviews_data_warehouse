@@ -22,15 +22,18 @@ CREATE TABLE STAGE.dim_DeveloperTable (
 	DeveloperCount integer,
 	ScrapeDate varchar(50));
 
+
 CREATE TABLE STAGE.dim_GenreTable (
-	GenreId integer NOT NULL PRIMARY KEY,
-	GenreName varchar,
-	GenreCount integer);
+	GenreId integer,
+	GenreName varchar(200),
+	GenreCount integer,
+	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_GenreBridgeTable (
-	GenreGameKey varchar NOT NULL PRIMARY KEY,
+	GenreGameKey varchar(50),
 	GenreId integer,
-	GameId integer);
+	GameId integer,
+	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_PlatformTable (
 	PlatformId integer NOT NULL PRIMARY KEY,
