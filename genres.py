@@ -93,30 +93,31 @@ def transform_to_load_set(scrape_timestamp: datetime):
 
         genre_mapping_list = games_extract[i]['genres']
 
-        for j in range(0, len(genre_mapping_list)):
-            try:
-                target_dictionary = {'ScrapeTimestamp': str(scrape_timestamp),
-                                    'GenreGameKey': str(games_extract[i]['id']) + '-' + str(genre_mapping_list[j]['id']),
-                                    'GameId': str(games_extract[i]['id']),
-                                    'GenreId': str(genre_mapping_list[j]['id'])
-                                    }
-                
-                genre_bridge_transformation_results_list.append(target_dictionary)
+        try:
 
-            except Exception as e:
-                logging.error(f"Transformation of ID {games_extract[i]['id']} has failed. Exception:\n {e}")
+            for j in range(0, len(genre_mapping_list)):
+                    target_dictionary = {'ScrapeTimestamp': str(scrape_timestamp),
+                                        'GenreGameKey': str(games_extract[i]['id']) + '-' + str(genre_mapping_list[j]['id']),
+                                        'GameId': str(games_extract[i]['id']),
+                                        'GenreId': str(genre_mapping_list[j]['id'])
+                                        }
+                
+            genre_bridge_transformation_results_list.append(target_dictionary)
+
+        except Exception as e:
+            logging.error(f"Transformation of ID {games_extract[i]['id']} has failed. Exception:\n {e}")
 
     #write intial extract to temporary JSON file using utitilities.py
     utilities.write_to_json(genre_properties_transformation_results_list, config['JSONarchive']['genre_properties_filtered'])
 
     #write intial extract to temporary JSON file using utilities.py
-    logging.info(f"Genre properties Transformation is complete.\nNumber of Records: {len(genre_properties_transformation_results_list)}")
+    logging.info(f"Genre properties transformation is complete.\nNumber of Records: {len(genre_properties_transformation_results_list)}")
 
     #write intial extract to temporary JSON file using utitilities.py
     utilities.write_to_json(genre_bridge_transformation_results_list, config['JSONarchive']['genre_bridge_filtered'])
 
     #write intial extract to temporary JSON file using utilities.py
-    logging.info(f"Genre properties Transformation is complete.\nNumber of Records: {len(genre_properties_transformation_results_list)}")
+    logging.info(f"Genre bridge transformation is complete.\nNumber of Records: {len(genre_properties_transformation_results_list)}")
 
 
 def load_to_database():
@@ -160,8 +161,8 @@ def load_to_database():
 
             INSERT INTO STAGE.dim_GenreBridgeTable (GenreGameKey, GenreId, GameId, ScrapeDate)
             VALUES (
-                {str(genre_bridge_filtered[i]['GenreGameKey'])},
-                {"'" + str(genre_bridge_filtered[i]['GenreId']).replace("'", "''") + "'"},
+                {"'" + str(genre_bridge_filtered[i]['GenreGameKey'])  + "'"},
+                {int(genre_bridge_filtered[i]['GenreId'])},
                 {int(genre_bridge_filtered[i]['GameId'])},
                 {"'" + str(genre_bridge_filtered[i]['ScrapeTimestamp']) + "'"})
 

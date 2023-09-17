@@ -36,6 +36,25 @@ CREATE TABLE STAGE.dim_GenreBridgeTable (
 	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_PlatformTable (
-	PlatformId integer NOT NULL PRIMARY KEY,
-	PlatformName varchar,
-	PlatformCount integer);
+	PlatformId integer,
+	PlatformName varchar(200),
+	PlatformCount integer,
+	ScrapeDate varchar(50));
+
+CREATE TABLE STAGE.dim_PlatformBridgeTable (
+	PlatformGameKey varchar(50),
+	PlatformId integer,
+	GameId integer,
+	ScrapeDate varchar(50));
+
+CREATE TABLE STAGE.dim_StoresTable (
+	StoreId integer,
+	StoreName varchar(200),
+	StoreCount integer,
+	ScrapeDate varchar(50));
+
+CREATE TABLE STAGE.dim_StoresBridgeTable (
+	StoreGameKey varchar(50),
+	StoreId integer,
+	GameId integer,
+	ScrapeDate varchar(50));
