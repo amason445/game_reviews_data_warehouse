@@ -10,7 +10,7 @@ CREATE TABLE STAGE.fact_GameReviews (
 	ScrapeDate varchar(50));
 
 CREATE TABLE STAGE.dim_date (
-	Date date NOT NULL PRIMARY KEY,
+	Date date,
 	year integer,
 	quarter integer,
 	month integer,
