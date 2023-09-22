@@ -7,4 +7,4 @@ FROM STAGE.dim_DeveloperTable devs
 LEFT JOIN STAGE.fact_GameReviews reviews on
 	devs.DeveloperId = reviews.DeveloperId
 
-GROUP BY devs.DeveloperName
+GROUP BY devs.DeveloperName;
