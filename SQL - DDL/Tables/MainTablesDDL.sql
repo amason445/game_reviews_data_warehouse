@@ -1,13 +1,17 @@
+USE GDW
+GO
+
 --create main tables for ETL process
 CREATE TABLE MAIN.fact_GameReviews (
-	GameId integer not null primary key,
+	GameDeveloperId varchar(100) not null primary key,
+	GameId integer,
 	GameTitle varchar(500),
-	ReleaseDate varchar(50),
+	ReleaseDate date,
 	DeveloperId integer,
 	RawgIO_Rating float,
 	RawgRatingsCount integer,
-	MetacriticScore varchar(50),
-	ScrapeDate varchar(50));
+	MetacriticScore integer,
+	ScrapeDate datetime);
 
 CREATE TABLE MAIN.dim_date (
 	Date date not null primary key,
@@ -22,6 +26,11 @@ CREATE TABLE MAIN.dim_DeveloperTable (
 	DeveloperCount integer,
 	ScrapeDate varchar(50));
 
+CREATE TABLE MAIN.dim_DeveloperBridgeTable (
+	DeveloperGameKey varchar(50) not null primary key,
+	DeveloperId integer,
+	GameId integer,
+	ScrapeDate varchar(50));
 
 CREATE TABLE MAIN.dim_GenreTable (
 	GenreId integer not null primary key,
