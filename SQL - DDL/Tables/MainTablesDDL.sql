@@ -67,3 +67,14 @@ CREATE TABLE MAIN.dim_StoresBridgeTable (
 	StoreId integer,
 	GameId integer,
 	ScrapeDate varchar(50));
+
+CREATE TABLE MAIN.dim_ParentPlatformTable (
+	ParentPlatformId integer not null primary key,
+	ParentPlatformName varchar(200),
+	ScrapeDate varchar(50));
+
+CREATE TABLE MAIN.dim_ParentPlatformBridgeTable (
+	ParentPlatformGameKey varchar(50) not null primary key,
+	ParentPlatformId integer,
+	GameId integer,
+	ScrapeDate varchar(50));

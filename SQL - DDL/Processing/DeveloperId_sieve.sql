@@ -6,12 +6,13 @@ WITH max_date AS (
 
 	SELECT
 	DeveloperId,
+	ScrapeDate,
 	RANK() OVER(ORDER BY ScrapeDate DESC) as max_date
 
 	FROM STAGE.dim_DeveloperTable
 )
 
-SELECT DISTINCT DeveloperId
+SELECT DISTINCT DeveloperId 
 
 FROM max_date
 

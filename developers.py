@@ -17,7 +17,7 @@ def initial_scrape():
     game_count = 0
 
     #sets API request limit for pagination feature
-    page_limit = 10
+    page_limit = 50
     request_count = 0
 
     URL = f"https://api.rawg.io/api/developers?key={config['APIkeys']['rawgio_key']}&page_size=50"

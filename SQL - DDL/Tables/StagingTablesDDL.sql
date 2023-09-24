@@ -58,3 +58,14 @@ CREATE TABLE STAGE.dim_StoresBridgeTable (
 	StoreId integer,
 	GameId integer,
 	ScrapeDate varchar(50));
+
+CREATE TABLE STAGE.dim_ParentPlatformTable (
+	ParentPlatformId integer,
+	ParentPlatformName varchar(200),
+	ScrapeDate varchar(50));
+
+CREATE TABLE STAGE.dim_ParentPlatformBridgeTable (
+	ParentPlatformGameKey varchar(50),
+	ParentPlatformId integer,
+	GameId integer,
+	ScrapeDate varchar(50));

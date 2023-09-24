@@ -78,6 +78,17 @@ BEGIN
 		GameId integer,
 		ScrapeDate varchar(50));
 
+	CREATE TABLE #dim_ParentPlatformTable (
+		ParentPlatformId integer,
+		ParentPlatformName varchar(200),
+		ScrapeDate varchar(50));
+
+	CREATE TABLE #dim_ParentPlatformBridgeTable (
+		ParentPlatformGameKey varchar(50),
+		ParentPlatformId integer,
+		GameId integer,
+		ScrapeDate varchar(50));
+
 END
 
 --process to move staging fact table to temporary fact table, adjust data and filter for the maximum scrape date
@@ -513,6 +524,79 @@ BEGIN
 		FROM max_date_filter
 END;
 
+--process to load parent platforms dim table to temporary dim table
+BEGIN
+	with max_date as (
+		SELECT
+		ParentPlatformId,
+		ParentPlatformName,
+		ScrapeDate,
+		RANK() OVER (ORDER BY CAST(ScrapeDate as datetime2) DESC) as ScrapeDateOrder
+	
+
+		FROM STAGE.dim_ParentPlatformTable),
+
+		max_date_filter AS (
+		SELECT 
+		ParentPlatformId,
+		ParentPlatformName,
+		ScrapeDate
+		
+		FROM max_date WHERE ScrapeDateOrder = 1)
+
+		INSERT INTO #dim_ParentPlatformTable
+		(
+			ParentPlatformId,
+			ParentPlatformName,
+			ScrapeDate
+		)
+	
+		SELECT
+			ParentPlatformId,
+			ParentPlatformName,
+			ScrapeDate
+		FROM max_date_filter
+END;
+
+
+--process to load parent platform dim table to temporary dim table
+BEGIN
+	with max_date as (
+		SELECT
+		ParentPlatformGameKey,
+		ParentPlatformId,
+		GameId,
+		ScrapeDate,
+		RANK() OVER (ORDER BY CAST(ScrapeDate as datetime2) DESC) as ScrapeDateOrder
+	
+		FROM STAGE.dim_ParentPlatformBridgeTable),
+
+		max_date_filter AS (
+		SELECT 
+		ParentPlatformGameKey,
+		ParentPlatformId,
+		GameId,
+		ScrapeDate
+		
+		FROM max_date WHERE ScrapeDateOrder = 1)
+
+
+		INSERT INTO #dim_ParentPlatformBridgeTable
+		(
+			ParentPlatformGameKey,
+			ParentPlatformId,
+			GameId,
+			ScrapeDate
+		)
+	
+		SELECT DISTINCT
+			ParentPlatformGameKey,
+			ParentPlatformId,
+			GameId,
+			ScrapeDate
+		FROM max_date_filter
+END;
+
 --process to load temporary tables to main fact table
 BEGIN
 	MERGE INTO MAIN.fact_GameReviews as target
@@ -744,6 +828,44 @@ BEGIN
 		source.GameId,
 		source.ScrapeDate);
 
+	MERGE INTO MAIN.dim_ParentPlatformTable as target
+	USING #dim_ParentPlatformTable as source
+	ON target.ParentPlatformId = source.ParentPlatformId
+	WHEN MATCHED THEN
+	UPDATE SET
+		target.ParentPlatformName = source.ParentPlatformName,
+		target.ScrapeDate = source.ScrapeDate
+	WHEN NOT MATCHED THEN INSERT
+	(
+		ParentPlatformId,
+		ParentPlatformName,
+		ScrapeDate
+	)
+	VALUES (
+		source.ParentPlatformId,
+		source.ParentPlatformName,
+		source.ScrapeDate);
+
+	MERGE INTO MAIN.dim_ParentPlatformBridgeTable as target
+	USING #dim_ParentPlatformBridgeTable as source
+	ON target.ParentPlatformGameKey = source.ParentPlatformGameKey
+	WHEN MATCHED THEN
+	UPDATE SET
+		target.ParentPlatformId = source.ParentPlatformId,
+		target.GameId = source.GameId,
+		target.ScrapeDate = source.ScrapeDate
+	WHEN NOT MATCHED THEN INSERT
+	(
+		ParentPlatformGameKey,
+		ParentPlatformId,
+		GameId,
+		ScrapeDate
+	)
+	VALUES (
+		source.ParentPlatformGameKey,
+		source.ParentPlatformId,
+		source.GameId,
+		source.ScrapeDate);
 END;
 
 
