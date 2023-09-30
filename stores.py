@@ -166,8 +166,6 @@ def load_to_database():
 
             """
 
-            logging.info(f"Query: {query}")
-
             crsr.execute(query)
             load_count += 1
 
