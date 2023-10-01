@@ -1,13 +1,14 @@
 USE GDW
 GO
 
+CREATE VIEW POWER_BI.platform_ratings_v
+AS
 
+WITH platform_ratings AS (
 
-WITH platform_ratings as (
-
-SELECT DISTINCT
-dim_parent.ParentPlatformName,
+SELECT
 dim_platform.PlatformName,
+dim_parent.ParentPlatformName,
 fact_reviews.GameTitle,
 fact_reviews.ReleaseDate,
 fact_reviews.RawgIO_Rating,
@@ -15,23 +16,24 @@ fact_reviews.RawgRatingsCount,
 fact_reviews.MetacriticScore
 
 
-FROM MAIN.dim_ParentPlatformTable dim_parent
+FROM MAIN.dim_PlatformTable dim_platform
 
-INNER JOIN MAIN.dim_ParentPlatformBridgeTable parent_bridge ON
-	dim_parent.ParentPlatformId = parent_bridge.ParentPlatformId
+INNER JOIN MAIN.dim_PlatformBridgeTable platform_bridge ON
+	dim_platform.PlatformId = platform_bridge.PlatformId
 
 INNER JOIN MAIN.fact_GameReviews fact_reviews ON
-	parent_bridge.GameId = fact_reviews.GameId
+	platform_bridge.GameId = fact_reviews.GameId
 	AND MetacriticScore IS NOT NULL
 	AND RawgIO_Rating IS NOT NULL
 
-INNER JOIN MAIN.dim_PlatformBridgeTable as platform_bridge ON
-	fact_reviews.GameId = platform_bridge.GameId
+INNER JOIN MAIN.dim_ParentPlatformBridgeTable as parent_bridge ON
+	fact_reviews.GameId = parent_bridge.GameId
 
-INNER JOIN MAIN.dim_PlatformTable dim_platform ON
-	platform_bridge.PlatformId = dim_platform.PlatformId
+INNER JOIN MAIN.dim_ParentPlatformTable dim_parent ON
+	parent_bridge.ParentPlatformId = dim_parent.ParentPlatformId
 	
 )
+
 
 SELECT 
 ReleaseDate as ReleaseYear, 
