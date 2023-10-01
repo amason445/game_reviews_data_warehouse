@@ -69,7 +69,7 @@ def initial_scrape():
 def transform_to_load_set(scrape_timestamp: datetime):
 
     #read initial extract from temporary JSON file using utilities.py
-    stores_extract = utilities.read_from_json(config['JSONarchive']['platform_extract'])
+    stores_extract = utilities.read_from_json(config['JSONarchive']['stores_extract'])
     games_extract = utilities.read_from_json(config['JSONarchive']['games_extract'])
 
     stores_properties_transformation_results_list = []
