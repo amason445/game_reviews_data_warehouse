@@ -1,7 +1,7 @@
 USE GDW
 GO
 
-ALTER VIEW POWER_BI.platform_ratings_v
+CREATE OR ALTER VIEW POWER_BI.platform_ratings_v
 AS
 
 SELECT
@@ -22,7 +22,7 @@ INNER JOIN MAIN.dim_PlatformBridgeTable platform_bridge ON
 INNER JOIN MAIN.fact_GameReviews fact_reviews ON
 	platform_bridge.GameId = fact_reviews.GameId
 	AND MetacriticScore IS NOT NULL
-	AND RawgIO_Rating IS NOT NULL
+	AND RawgRatingsCount > 0
 
 INNER JOIN MAIN.dim_ParentPlatformBridgeTable as parent_bridge ON
 	fact_reviews.GameId = parent_bridge.GameId
