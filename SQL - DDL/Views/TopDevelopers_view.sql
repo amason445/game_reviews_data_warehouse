@@ -1,3 +1,8 @@
+/**
+This view uses joins across the star schema in GDW.MAIN to build a data set of developers, the games they've made, where they're listed for sale and what platforms they're on.
+I used view to build a dashboard that ranks developers by review scores. It also allows filtering by Store Name and Platform Family (Play Station, Xbox, Nintendo, PC/Linux/Apple).
+**/
+
 USE GDW
 GO
 

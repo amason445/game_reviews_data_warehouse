@@ -1,3 +1,9 @@
+/**
+This view uses joins across the star schema in GDW.MAIN to build a data set of video game platforms, the games on each platform, and the platform familes.
+I used view to build a dashboard that allows drill down into game platforms to see average ratings over time.
+It also allows filtering by Platform Name (Xbox, Xbox 360....) and Platform Family (Play Station, Xbox, Nintendo, PC/Linux/Apple).
+**/
+
 USE GDW
 GO
 

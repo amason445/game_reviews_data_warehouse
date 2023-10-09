@@ -1,3 +1,9 @@
+/**
+This view uses joins across the star schema in GDW.MAIN to build a data set of video game genres, the games for each genre, and the developer for each game.
+I used view to build a dashboard that allows users to analyze review data for each genre over time.
+It also included a table allowing users to see which developers are releasing for each genre.
+**/
+
 USE GDW
 GO
 
