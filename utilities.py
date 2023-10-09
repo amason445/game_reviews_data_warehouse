@@ -1,3 +1,8 @@
+'''
+This module contains a variety of utility functions that are used throughout the project.
+These functions are improted into most of the other scripts.
+'''
+
 import json
 import time
 

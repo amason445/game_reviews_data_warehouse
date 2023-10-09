@@ -1,3 +1,11 @@
+'''
+This script accesses the Rawg.io games endpoint as JSON objects, transforms them and then loads them to a Microsoft SQL Server Database.
+This script has to be ran after the developers.py script since the game data is accessed by the developers who made them.
+There are SQL queries in the resource estimation folder which can help approximate resource expenditure for this script.
+Each ETL stage is stored in functions and then accessed by the main function at the bottom of the script.
+End point: https://api.rawg.io/docs/#tag/games
+'''
+
 import logging
 from datetime import datetime
 import toml
@@ -5,16 +13,21 @@ import requests
 import utilities
 import pyodbc
 
+#set log file configuration using Python's logging library
 logging.basicConfig(filename='logging\\games.log', encoding='utf-8', level=logging.INFO, 
                     format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+#path to toml config file
 config = toml.load("config.toml")
 
 def initial_scrape():
 
+    #insert query to load raw data into database
     conn = pyodbc.connect(config['Database']['connection_string'])
     crsr = conn.cursor()
 
+    # this query is used to access the developer data that was scarped and loaded from developers.py
+    # it is also with the other SQL and named processing/DeveloperId_sieve.sql
     try:
         query = f"""
                 WITH max_date AS (
@@ -53,6 +66,7 @@ def initial_scrape():
 
     for i in range(0, len(idUniverse)):
 
+        #target URL for Python requests library
         URL = f"https://api.rawg.io/api/games?key={config['APIkeys']['rawgio_key']}&developers={idUniverse[i]}&limit=50&ordering=released"
 
         try:
@@ -108,7 +122,7 @@ def initial_scrape():
                 logging.error(f"Request for {idUniverse[i]} failed:\n{e}")
                 break
 
-    logging.info(f"Initial developer request was successful.\nCount of games: {len(game_scrape_results_list)}")
+    logging.info(f"Initial games request was successful.\nCount of games: {len(game_scrape_results_list)}")
 
     #write intial extract to temporary JSON file using utilities.py
     utilities.write_to_json(game_scrape_results_list, config['JSONarchive']['games_extract'])
@@ -142,12 +156,13 @@ def transform_to_load_set(scrape_timestamp: datetime):
     utilities.write_to_json(transformation_results_list, config['JSONarchive']['games_filtered'])
 
     #write intial extract to temporary JSON file using utilities.py
-    logging.info(f"Developer Transformation is complete.\nNumber of Records: {len(transformation_results_list)}")
+    logging.info(f"Games Transformation is complete.\nNumber of Records: {len(transformation_results_list)}")
 
 def load_to_database():
     
     games_filtered = utilities.read_from_json(config['JSONarchive']['games_filtered'])
     
+    #reads connection string from config file using pyodbc and connects to database
     conn = pyodbc.connect(config['Database']['connection_string'])
     crsr = conn.cursor()
 
@@ -156,6 +171,8 @@ def load_to_database():
     for i in range(0, len(games_filtered)):
 
         try:
+
+            #insert query to load raw data into database
             query = f"""
             
                 INSERT INTO STAGE.fact_GameReviews (
@@ -191,6 +208,7 @@ def load_to_database():
     crsr.commit()
     conn.close
 
+#calls each of the above functions to complete ETL
 if __name__ == "__main__":
     scrape_timestamp = datetime.now()
     initial_scrape()

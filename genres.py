@@ -1,3 +1,9 @@
+'''
+This script accesses the Rawg.io genres endpoint as JSON objects, transforms them and then loads them to a Microsoft SQL Server Database.
+Each ETL stage is stored in functions and then accessed by the main function at the bottom of the script.
+End point: https://api.rawg.io/docs/#tag/genres
+'''
+
 import logging
 from datetime import datetime
 import toml
@@ -5,9 +11,11 @@ import requests
 import utilities
 import pyodbc
 
+#set log file configuration using Python's logging library
 logging.basicConfig(filename='logging\\genre.log', encoding='utf-8', level=logging.INFO, 
                     format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+#path to toml config file
 config = toml.load("config.toml")
 
 def initial_scrape():
@@ -19,6 +27,7 @@ def initial_scrape():
     page_limit = 10
     request_count = 0
 
+    #target URL for Python requests library
     URL = f"https://api.rawg.io/api/genres?key={config['APIkeys']['rawgio_key']}&limit=50"
 
     try:
@@ -63,13 +72,12 @@ def initial_scrape():
 
     logging.info(f"Initial genre request was successful.\nCount of genre: {len(genre_scrape_results_list)}\n")
         
-    
     #write intial extract to temporary JSON file using utilities.py
     utilities.write_to_json(genre_scrape_results_list, config['JSONarchive']['genre_extract'])
 
 def transform_to_load_set(scrape_timestamp: datetime):
 
-    #read initial extract from temporary JSON file using utilities.py
+    #read initial extract from temporary JSON files using utilities.py
     genre_extract = utilities.read_from_json(config['JSONarchive']['genre_extract'])
     games_extract = utilities.read_from_json(config['JSONarchive']['games_extract'])
 
@@ -125,7 +133,7 @@ def load_to_database():
     genre_properties_filtered = utilities.read_from_json(config['JSONarchive']['genre_properties_filtered'])
     genre_bridge_filtered = utilities.read_from_json(config['JSONarchive']['genre_bridge_filtered'])
 
-    
+    #reads connection string from config file using pyodbc and connects to database
     conn = pyodbc.connect(config['Database']['connection_string'])
     crsr = conn.cursor()
 
@@ -135,6 +143,7 @@ def load_to_database():
 
         try:
 
+            #insert query to load raw data into database
             query = f"""
 
             INSERT INTO STAGE.dim_GenreTable (GenreId, GenreName, GenreCount, ScrapeDate)
@@ -157,6 +166,7 @@ def load_to_database():
 
         try:
 
+            #insert query to load raw data into database
             query = f"""
 
             INSERT INTO STAGE.dim_GenreBridgeTable (GenreGameKey, GenreId, GameId, ScrapeDate)
@@ -180,6 +190,7 @@ def load_to_database():
     crsr.commit()
     conn.close
 
+#calls each of the above functions to complete ETL
 if __name__ == "__main__":
     scrape_timestamp = datetime.now()
     initial_scrape()

@@ -1,3 +1,10 @@
+'''
+This script accesses the Rawg.io developers endpoint as JSON objects, transforms them and then loads them to a Microsoft SQL Server Database.
+The script stops at a set number of pages within the API. This limit can be scaled with more API resources but the script is currently constrained.
+Each ETL stage is stored in functions and then accessed by the main function at the bottom of the script.
+End point: https://api.rawg.io/docs/#operation/developers_list
+'''
+
 import logging
 from datetime import datetime
 import toml
@@ -5,9 +12,11 @@ import requests
 import utilities
 import pyodbc
 
+#set log file configuration using Python's logging library
 logging.basicConfig(filename='logging\\developers.log', encoding='utf-8', level=logging.INFO, 
                     format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+#path to toml config file
 config = toml.load("config.toml")
 
 def initial_scrape():
@@ -20,6 +29,7 @@ def initial_scrape():
     page_limit = 100
     request_count = 0
 
+    #target URL for Python requests library
     URL = f"https://api.rawg.io/api/developers?key={config['APIkeys']['rawgio_key']}&page_size=50"
 
     try:
@@ -61,10 +71,8 @@ def initial_scrape():
         except Exception as e:
             logging.error(f"Request failed:\n{e}")
 
-
     logging.info(f"Initial developer request was successful.\nCount of developers: {len(developer_scrape_results_list)}\nCount of scrapeable games: {game_count}")
-        
-    
+         
     #write intial extract to temporary JSON file using utilities.py
     utilities.write_to_json(developer_scrape_results_list, config['JSONarchive']['developer_extract'])
 
@@ -98,6 +106,7 @@ def load_to_database():
     
     developer_filtered = utilities.read_from_json(config['JSONarchive']['developer_filtered'])
     
+    #reads connection string from config file using pyodbc and connects to database
     conn = pyodbc.connect(config['Database']['connection_string'])
     crsr = conn.cursor()
 
@@ -107,6 +116,7 @@ def load_to_database():
 
         try:
 
+            #insert query to load raw data into database
             query = f"""
 
             INSERT INTO STAGE.dim_DeveloperTable (DeveloperId, DeveloperName, DeveloperCount, ScrapeDate)
@@ -129,6 +139,7 @@ def load_to_database():
     crsr.commit()
     conn.close
 
+#calls each of the above functions to complete ETL
 if __name__ == "__main__":
     scrape_timestamp = datetime.now()
     initial_scrape()
