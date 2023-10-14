@@ -12,6 +12,7 @@ This repository contains an academic project that I build for a capstone course 
 
 ## Data Source: Rawg.io
 Rawg.io is a large, public database that collects and maintains information about video games and video game ratings. Rawg.io also provides a publicly available API which I used to scrape this data (Rawg.io, 2023). The API follows the REST architecture, uses HTTP requests and returns JSON Objects (Gupta, 2022). For this project, I accessed five end points Rawg.io wrote for their API:
+
 - [Developer End Point](https://api.rawg.io/docs/#tag/developers)
 - [Games End Point](https://api.rawg.io/docs/#tag/games)
 - [Genre End Point](https://api.rawg.io/docs/#tag/genres)
