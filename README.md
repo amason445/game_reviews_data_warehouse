@@ -20,16 +20,16 @@ Rawg.io is a large, public database that collects and maintains information abou
 - [Platform End Point](https://api.rawg.io/docs/#tag/platforms)
 - [Stores End Point](https://api.rawg.io/docs/#tag/stores)
 
-Each endpoint was accessed with it's own Python script. Before they could be accessed, analysis had to be done on each endpoint with Postman to understand the JSON Structure extract relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the API structure was analyzed, Python scripts were written to do a batch extraction on each endpoint.
+Each endpoint was accessed with it's own Python script. Before they could be accessed, analysis had to be done on each endpoint with Postman to understand the JSON Structure extract target fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the API structure was analyzed, Python scripts were written to do a batch extraction on each endpoint. In order to use this API, it is mandatory to register for an API Key on the website.
 
 ## ETL Process and Source Code
-The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. First, the JSON is scraped and transformed in intermediary steps. These steps are stored on local flat files. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server. Once it is normalized, this data warehouse can be accessed with SQL for further analysis. 
+The ETL processes leverages Python to extract the target data from each endpoint and load it into staging tables stored in Microsoft SQL Server. First, the JSON is scraped and transformed in intermediary steps stored on flat files. Then, it is loaded into SQL Server with pyodbc. Then, once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data intto the final landing area in SQL Server. After normalization, this data warehouse can be accessed with SQL for further analysis. 
 
-Right now, the Python is not bundled into a scheduler so each end point must be run manually. Additionally, the game end point is dependent on the developers being scraped and loaded first. The ETL was designed this was to insure every develop has their complete history of games loaded into the data warehouse. Below is a screenshot of the ETL process.
+Right now, the Python is not bundled into a scheduler so each end point must be run manually. Additionally, the games end point is dependent on the developers being scraped and loaded first. The ETL was designed this was to insure every develop has their complete history of games loaded into the data warehouse. Below is a screenshot of the ETL process.
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/ETL%20Process.png)
 
-Finally, all of the SQL is stored in the folder SQL - DDL including the table defintions, the stored procedure, test queries and views for analysis. Additionally, the Python relies on a configuration file that is called "config.toml". This file contains important information such as where the intermediary JSON will be pathed to and the Rawg.io API key.
+Finally, the SQL is stored in the folder: SQL - DDL. This folder includes the table defintions, a query to get developer ids after they're loaded, the stored procedure, test queries and views I wrote for analysis. Additionally, the Python relies on a configuration file that is called "config.toml". This file contains important information such as where the intermediary JSON documents will be stored and the Rawg.io API key.
 
 ## Date Warehouse Architecture
 The data warehouse architecture follows a typical star schema pattern (Databricks, 2023). However, a lot of bridge tables were needed because each end point is joined with many-to-many relationships (IBM, 2023). Below is a screenshot of the architecture:
