@@ -3,7 +3,7 @@
 ## Project Summary
 This repository contains artifacts from an academic project that I built during my graduate program at Regis University. For this project, I built a data warehouse using data from Rawg.io's public API. Rawg.io is a large, public database that contains information about video games and their ratings. I also wrote views with this data warehouse and connected them Microsoft's PowerBI for visualization. The repository artifacts include the source code, raw data and sample visualizations and documentation explaining the database architecture and ETL process.
 
-There were some project difficulties and roadblocks. I had a few bugs I had to fix throughout the project and I had to manage API resources properly. As of, October 13, 2023, Rawg.io's free tier only allows 20,000 API requests per month. So, I had to carefully estimate API useage and cache intermediary data to avoid duplicating requests.
+There were some project difficulties and roadblocks. I had a few bugs I had to fix throughout the project and I had to manage API resources properly. As of October 13, 2023, Rawg.io's free tier only allows 20,000 API requests per month. So, I had to carefully estimate API useage and cache intermediary data to avoid duplicating requests.
 
 ## Technology Used
 - [Postman](https://www.postman.com/)
