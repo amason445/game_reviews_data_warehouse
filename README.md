@@ -21,6 +21,11 @@ Rawg.io is a large, public database that collects and maintains information abou
 
 Each endpoint was accessed with it's own Python script and analysis had to be done on each endpoint with Postman and Python to extract the relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the structure was analyzed, Python scripts were written to do a patch extraction on each end point.
 
+## ETL Process
+The ETL processes leverages Python
+
+![alt text](Reference Screenshots/ETL Process.jpg)
+
 ## References 
 Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
 Postman. (n.d.). *Postman API Platform.* https://www.postman.com/ 
