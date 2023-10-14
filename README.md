@@ -12,7 +12,7 @@ This repository contains artifacts from an academic project that I built during 
 - Python
 
 ## Data Source: Rawg.io
-Rawg.io is a large, public database that collects and maintains information about video games and video game ratings. Rawg.io also provides a publicly available API which I used to scrape this data (Rawg.io, 2023). The API follows the REST architecture, uses HTTP requests and returns JSON Objects (Gupta, 2022). For this project, I accessed five end points Rawg.io wrote for their API:
+Rawg.io is a large, public database that collects and maintains information about video games and video game ratings. Rawg.io also provides a publicly available API which I used to scrape this data (Rawg.io, 2023). The API follows the REST architecture, uses HTTP requests and returns JSON Objects (Gupta, 2022). For this project, I accessed five endpoints Rawg.io wrote for their API:
 
 - [Developer End Point](https://api.rawg.io/docs/#tag/developers)
 - [Games End Point](https://api.rawg.io/docs/#tag/games)
@@ -20,7 +20,7 @@ Rawg.io is a large, public database that collects and maintains information abou
 - [Platform End Point](https://api.rawg.io/docs/#tag/platforms)
 - [Stores End Point](https://api.rawg.io/docs/#tag/stores)
 
-Each endpoint was accessed with it's own Python script. Before they could be accessed, analysis had to be done on each endpoint with Postman to understand the JSON Structure extract relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the structure was analyzed, Python scripts were written to do a patch extraction on each end point.
+Each endpoint was accessed with it's own Python script. Before they could be accessed, analysis had to be done on each endpoint with Postman to understand the JSON Structure extract relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the API structure was analyzed, Python scripts were written to do a batch extraction on each endpoint.
 
 ## ETL Process and Source Code
 The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. First, the JSON is scraped and transformed in intermediary steps. These steps are stored on local flat files. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server. Once it is normalized, this data warehouse can be accessed with SQL for further analysis. 
