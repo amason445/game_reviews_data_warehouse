@@ -36,7 +36,7 @@ The data warehouse architecture follows a typical star schema pattern (Databrick
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/Video%20Game%20Data%20Warehouse.png)
 
-Additionally, there are four schemas that will need to be created on SQL Server:
+Additionally, there are four schemas that will need to be created in SQL Server:
 
 - **STAGE**: This is the landing schema for the Python process. It only stores raw data
 - **MAIN**: This schema contains the star schema. It is the final data warehouse
@@ -44,7 +44,7 @@ Additionally, there are four schemas that will need to be created on SQL Server:
 - **POWER_BI** This schema contains analytical views written from the main tables
 
 ## Sample Data and Visualizations
-I've included a folder containing some sample output data and rough visualizations in Microsoft Excel. The folder is called: Sample Data and Visualizations.
+I've included some sample output data and rough visualizations in a folder called: Sample Data and Visualizations.
 
 Finally, I've also included some screenshots below of dashboards I've built in Microsoft's PowerBI:
 
@@ -53,6 +53,10 @@ Finally, I've also included some screenshots below of dashboards I've built in M
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/PowerBI%20Dashboard%20Example%202.png)
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/PowerBI%20Dashboard%20Example%203.png)
+
+## Future Ideas
+- Bundle each endpoint Python script into a scheduler to have routine batch jobs
+- Enrich the data warehouse with more diverse dimensional data
 
 ## References 
 - Databricks. What is star schema?. (n.d.). https://www.databricks.com/glossary/star-schema 
