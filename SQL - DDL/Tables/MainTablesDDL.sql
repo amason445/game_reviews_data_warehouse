@@ -1,5 +1,7 @@
-USE GDW
-GO
+/**
+This SQL DDL defines the tables in the main schema.
+This is the final landing area for the tables after they have been loaded and normalized.
+**/
 
 --create main tables for ETL process
 CREATE TABLE MAIN.fact_GameReviews (

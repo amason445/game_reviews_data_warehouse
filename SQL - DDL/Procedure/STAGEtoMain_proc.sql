@@ -1,5 +1,9 @@
 /***
-This procedure scrapes the staging tables, adjusts them and uses merge insert to load them into the main tables
+This procedure scrapes the staging tables, adjusts them and uses merge insert to load them into the main tables.
+This procedure is required to extract the raw data from staging, normalize it and then load it to the final tables.
+It first changes the data types, creates logic for primary keys and it recasts certain fields to the right data types using temporary tables.
+Then it uses merge logic to validate primary keys in the temporary tables against whats already loaded in the main tables.
+Finally it uses update/insert queries to merge the data.
 ***/
 
 
@@ -598,6 +602,8 @@ BEGIN
 END;
 
 --process to load temporary tables to main fact table
+--uses merge logic to check staging data against primary keys which have already been stored in main against temp tables
+--then inserts of updates the record
 BEGIN
 	MERGE INTO MAIN.fact_GameReviews as target
 	USING #fact_GameReviews as source

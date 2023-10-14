@@ -1,3 +1,9 @@
+/**
+This script stores all of the DDL SQL for the staging tables. 
+The Python will store all of the raw data in these staging tables before it is normalized into the main tables.
+**/
+
+
 --create staging tables for ETL process
 CREATE TABLE STAGE.fact_GameReviews (
 	GameId integer,
@@ -21,7 +27,6 @@ CREATE TABLE STAGE.dim_DeveloperTable (
 	DeveloperName varchar(200),
 	DeveloperCount integer,
 	ScrapeDate varchar(50));
-
 
 CREATE TABLE STAGE.dim_GenreTable (
 	GenreId integer,
