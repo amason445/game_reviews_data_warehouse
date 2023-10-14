@@ -22,7 +22,7 @@ Rawg.io is a large, public database that collects and maintains information abou
 Each endpoint was accessed with it's own Python script and analysis had to be done on each endpoint with Postman and Python to extract the relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the structure was analyzed, Python scripts were written to do a patch extraction on each end point.
 
 ## ETL Process
-The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server.
+The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server. All of the SQL is stored in the folder SQL - DDL including the table defintions, the stored procedure, test queries and views for analysis.
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/ETL%20Process.png)
 
