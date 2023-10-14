@@ -22,9 +22,14 @@ Rawg.io is a large, public database that collects and maintains information abou
 Each endpoint was accessed with it's own Python script and analysis had to be done on each endpoint with Postman and Python to extract the relevant fields. Postman is a free service that allows users to test individual API requests (Postman, 2023). Once the structure was analyzed, Python scripts were written to do a patch extraction on each end point.
 
 ## ETL Process
-The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server. All of the SQL is stored in the folder SQL - DDL including the table defintions, the stored procedure, test queries and views for analysis.
+The ETL processes leverages Python to extract the relevant data from each end point and load it into staging tables in Microsoft SQL Server. First, the JSON is scraped and transformed in intermediary steps. These steps are stored on local flat files. Once the data is loaded, a Stored Procedure written in SQL can be used to normalize and load the data to the final landing area in SQL Server. Once it is normalized, this data warehouse can be accessed with SQL for further analysis. 
+
+Right now, the Python is not bundled into a scheduler so each end point must be run manually. Additionally, the game end point is dependent on the developers being scraped and loaded first. The ETL was designed this was to insure every develop has their complete history of games loaded into the data warehouse. Below is a screenshot of the ETL process.
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/ETL%20Process.png)
+
+Finally, all of the SQL is stored in the folder SQL - DDL including the table defintions, the stored procedure, test queries and views for analysis. Additionally, the Python relies on a configuration file that is called "config.toml". This file contains important information such as where the intermediary JSON will be pathed to and the Rawg.io API key.
+
 
 ## References 
 Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
