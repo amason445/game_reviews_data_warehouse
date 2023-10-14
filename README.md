@@ -24,7 +24,7 @@ Each endpoint was accessed with it's own Python script and analysis had to be do
 ## ETL Process
 The ETL processes leverages Python
 
-![alt text](/Reference Screenshots/ETL Process.jpg)
+![alt text](ETL Process.jpg)
 
 ## References 
 Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
