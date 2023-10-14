@@ -4,11 +4,12 @@
 This repository contains an academic project that I build for a capstone course during my Master of Data Science program at Regis University. This project contains ETL and SQL for a data warehouse I built using data from Rawg.io's public API. The final product is a star schema I built using their video game reviews and meta data. I also wrote SQL Views with this data warehouse and connected to Microsoft's PowerBI for visualizations. This repository contains artifacts from the project including the source code, raw data and sample visualizations. It also contains documentation explaining the database architecture and ETL process.
 
 ## Technology Used
-- Postman
-- Python
-- Microsoft SQL Server
-- Microsoft PowerBI
+- [Postman](https://www.postman.com/)
+- [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server)
+- [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/)
+- [Transact-SQL](https://learn.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver16)
 - Microsoft Excel
+- Python
 
 ## Data Source: Rawg.io
 Rawg.io is a large, public database that collects and maintains information about video games and video game ratings. Rawg.io also provides a publicly available API which I used to scrape this data (Rawg.io, 2023). The API follows the REST architecture, uses HTTP requests and returns JSON Objects (Gupta, 2022). For this project, I accessed five end points Rawg.io wrote for their API:
@@ -47,12 +48,12 @@ Finally, I've also included some screenshots below of dashboards I've built in M
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/PowerBI%20Dashboard%20Example%203.png)
 
 ## References 
-Databricks. What is star schema?. (n.d.). https://www.databricks.com/glossary/star-schema 
-Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
-IBM. (2023, June 6). Bridge tables. https://www.ibm.com/docs/el/cognos-analytics/12.0.0?topic=relationships-bridge-tables 
-Postman. (n.d.). *Postman API Platform.* https://www.postman.com/ 
-Rawg.io. *The biggest video game database on RAWG - video game Discovery Service. The Biggest Video Game Database on RAWG - Video Game Discovery Service.* (n.d.). https://rawg.io/ 
-Rawg.io. *Explore RAWG Video Games Database API - RAWG.* RAWG. (n.d.). https://rawg.io/apidocs
+- Databricks. What is star schema?. (n.d.). https://www.databricks.com/glossary/star-schema 
+- Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
+- IBM. (2023, June 6). Bridge tables. https://www.ibm.com/docs/el/cognos-analytics/12.0.0?topic=relationships-bridge-tables 
+- Postman. (n.d.). *Postman API Platform.* https://www.postman.com/ 
+- Rawg.io. *The biggest video game database on RAWG - video game Discovery Service. The Biggest Video Game Database on RAWG - Video Game Discovery Service.* (n.d.). https://rawg.io/ 
+- Rawg.io. *Explore RAWG Video Games Database API - RAWG.* RAWG. (n.d.). https://rawg.io/apidocs
 
 
 
