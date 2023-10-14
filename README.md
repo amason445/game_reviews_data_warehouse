@@ -30,7 +30,7 @@ Right now, the Python is not bundled into a scheduler so each end point must be 
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/ETL%20Process.png)
 
-Finally, the SQL is stored in the folder: SQL - DDL. This folder includes the table defintions, a query to get developer ids after they're loaded, the stored procedure, test queries and views I wrote for analysis. Additionally, the Python relies on a configuration file that is called "config.toml". This file contains important information such as where the intermediary JSON documents will be stored and the Rawg.io API key.
+Finally, the SQL is stored in the folder: SQL - DDL. This folder includes the table defintions, a query to get developer ids after they're loaded, the stored procedure, test queries and views I wrote for analysis. Additionally, the Python relies on a configuration file that is called: config.toml. This file contains important information such as where the intermediary JSON documents will be stored and the Rawg.io API key.
 
 ## Date Warehouse Architecture
 The data warehouse architecture follows a typical star schema pattern (Databricks, 2023). However, a lot of bridge tables were needed because each end point is joined with many-to-many relationships (IBM, 2023). Below is a screenshot of the architecture:
