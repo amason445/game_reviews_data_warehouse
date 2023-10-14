@@ -1,7 +1,7 @@
-# Data Warehouse Project - Video Game Review Aggregation
+# Regis University Practicum Project I - Video Game Review Aggregation and Data Warehouse
 
 ## Project Summary
-This repository contains artifacts from an academic project that I built for a capstone course during my Master of Data Science program at Regis University. For this project, I built a data warehouse using data from Rawg.io's public API. Rawg.io is a large, public database that contains information about video games and their ratings. I also wrote views with this data warehouse and connected them Microsoft's PowerBI for visualization. The repository artifacts include the source code, raw data and sample visualizations and documentation explaining the database architecture and ETL process.
+This repository contains artifacts from an academic project that I built during my graduate program at Regis University. For this project, I built a data warehouse using data from Rawg.io's public API. Rawg.io is a large, public database that contains information about video games and their ratings. I also wrote views with this data warehouse and connected them Microsoft's PowerBI for visualization. The repository artifacts include the source code, raw data and sample visualizations and documentation explaining the database architecture and ETL process.
 
 ## Technology Used
 - [Postman](https://www.postman.com/)
