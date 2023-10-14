@@ -58,6 +58,7 @@ Finally, I've also included some screenshots below of dashboards I've built in M
 ## Future Ideas
 - Bundle each endpoint Python script into a scheduler to have routine batch jobs
 - Enrich the data warehouse with more diverse dimensional data
+- Scrape additional endpoints
 
 ## References 
 - Databricks. What is star schema?. (n.d.). https://www.databricks.com/glossary/star-schema 
