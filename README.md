@@ -36,6 +36,13 @@ The data warehouse architecture follows a typical star schema pattern (Databrick
 
 ![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/Video%20Game%20Data%20Warehouse.png)
 
+Additionally, there are four schemas that will need to be created on SQL Server:
+
+- **STAGE**: This is the landing schema for the Python process. It only stores raw data
+- **MAIN**: This schema contains the star schema. It is the final data warehouse
+- **etl**: This schema contains the stored procedure that brings creates the main tables from the staging tables
+- **POWER_BI** This schema contains analytical views written from the main tables
+
 ## Sample Data and Visualizations
 I've included a folder containing some sample output data and rough visualizations in Microsoft Excel. The folder is called: Sample Data and Visualizations.
 
