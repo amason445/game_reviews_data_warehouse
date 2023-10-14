@@ -5,11 +5,12 @@ This repository contains artifacts from an academic project that I built during 
 
 ## Technology Used
 - [Postman](https://www.postman.com/)
+- Python
+- Microsoft Excel
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server)
 - [Microsoft PowerBI](https://powerbi.microsoft.com/en-us/)
 - [Transact-SQL](https://learn.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver16)
-- Microsoft Excel
-- Python
+
 
 ## Data Source: Rawg.io
 Rawg.io is a large, public database that collects and maintains information about video games and video game ratings. Rawg.io also provides a publicly available API which I used to scrape this data (Rawg.io, 2023). The API follows the REST architecture, uses HTTP requests and returns JSON Objects (Gupta, 2022). For this project, I accessed five endpoints Rawg.io wrote for their API:
