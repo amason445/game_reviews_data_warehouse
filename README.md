@@ -30,11 +30,19 @@ Right now, the Python is not bundled into a scheduler so each end point must be 
 
 Finally, all of the SQL is stored in the folder SQL - DDL including the table defintions, the stored procedure, test queries and views for analysis. Additionally, the Python relies on a configuration file that is called "config.toml". This file contains important information such as where the intermediary JSON will be pathed to and the Rawg.io API key.
 
+## Date Warehouse Architecture
+The data warehouse architecture follows a typical star schema pattern (Databricks, 2023). However, a lot of bridge tables were needed because each end point is joined with many-to-many relationships. Below is a screenshot of the architecture:
+
+![alt text](https://github.com/amason445/game_reviews_data_warehouse/blob/main/Reference%20Screenshots/Video%20Game%20Data%20Warehouse.png)
 
 ## References 
+Databricks. What is star schema?. (n.d.). https://www.databricks.com/glossary/star-schema 
 Gupta, L. (2022, April 7). *What is rest.* REST API Tutorial. https://restfulapi.net/ 
+IBM. (2023, June 6). Bridge tables. https://www.ibm.com/docs/el/cognos-analytics/12.0.0?topic=relationships-bridge-tables 
 Postman. (n.d.). *Postman API Platform.* https://www.postman.com/ 
 Rawg.io. *The biggest video game database on RAWG - video game Discovery Service. The Biggest Video Game Database on RAWG - Video Game Discovery Service.* (n.d.). https://rawg.io/ 
 Rawg.io. *Explore RAWG Video Games Database API - RAWG.* RAWG. (n.d.). https://rawg.io/apidocs
+
+
 
  
