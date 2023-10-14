@@ -1,7 +1,7 @@
 # Video Game Data Warehouse Project
 
 ## Project Summary
-This repository contains an academic project that I build for a capstone course during my Master of Data Science program at Regis University. This project contains ETL and SQL for a data warehouse I built using data from Rawg.io's public API. The final product is a star schema I built using their video game reviews and meta data. I also wrote SQL Views with this data warehouse and connected to Microsoft's PowerBI for visualizations. This repository contains artifacts from the project including the source code, raw data and sample visualizations. It also contains documentation explaining the database architecture and ETL process.
+This repository contains artifacts from an academic project that I built for a capstone course during my Master of Data Science program at Regis University. For this project, I built a data warehouse using data from Rawg.io's public API. Rawg.io is a large, public database that contains information about video games and their ratings. I also wrote views with this data warehouse and connected them Microsoft's PowerBI for visualization. The repository artifacts include the source code, raw data and sample visualizations and documentation explaining the database architecture and ETL process.
 
 ## Technology Used
 - [Postman](https://www.postman.com/)
